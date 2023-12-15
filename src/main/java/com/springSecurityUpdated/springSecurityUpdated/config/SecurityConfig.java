@@ -22,15 +22,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/user/save", "/product/all").permitAll()
+        http
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/login", "/register","/user/save").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(withDefaults())
-                .formLogin(withDefaults())
+                .formLogin()
+                .loginPage("/login")
+                .and()
                 .csrf(AbstractHttpConfigurer::disable);
-        return http.build();
 
+        return http.build();
     }
+
 
     @Bean
     public UserDetailsService userDetailsService(){
