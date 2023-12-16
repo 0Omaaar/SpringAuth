@@ -52,12 +52,7 @@ public class Controller {
         ourUser.setPassword(passwordEncoder.encode(ourUser.getPassword()));
         OurUser result = ourUserRepo.save(ourUser);
 
-        ModelAndView modelAndView = new ModelAndView();
-
-
-        if (result.getId() > 0){
-            modelAndView.setViewName("redirect:/");
-        }
+        ModelAndView modelAndView = new ModelAndView("redirect:/home.html");
 
         return modelAndView;
     }
